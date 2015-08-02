@@ -1,6 +1,7 @@
 ---
 - name: Configure webserver with nginx
   hosts: 127.0.0.1
+  connection: local
   sudo: True
   vars:
     key_file: /etc/nginx/ssl/nginx.key
@@ -28,11 +29,9 @@
         dest=/etc/nginx/sites-enabled/default
         src={{ conf_file }}
         state=link
-      notify: restart nginx
     
     - name: copy index.html
       template: src=templates/index.html.j2 dest=/usr/share/nginx/html/index.html mode=0644
 
-  handlers:
     - name: restart nginx
       service: name=nginx state=restarted
