@@ -37,7 +37,6 @@
       template: src=templates/index.html.j2 dest=/usr/share/nginx/html/index.html mode=0644
 
     - name: git clone website
-      template: src=templates/index.html.j2 dest=/usr/share/nginx/html/index.html mode=0644
       git: repo={{ website_repo_url }} dest={{ website_location }} accept_hostkey=yes
 
     - name: restart nginx
